@@ -14,4 +14,7 @@ Overall, our fintech website project is focused on providing a secure and trustw
 
 
 
-front-end video link of the webiste:  https://drive.google.com/file/d/15l_ZuO4eY8gIp1sxJ9b6ojiSGRDAIr1c/view?usp=sharing
+front-end video link of the webiste review:  https://drive.google.com/file/d/15l_ZuO4eY8gIp1sxJ9b6ojiSGRDAIr1c/view?usp=sharing
+
+
+SHA256 algorithm code review : https://drive.google.com/file/d/1-Bvyq76cOWjm7lqRmYYUp6qA3pxGWfl6/view?usp=sharing
