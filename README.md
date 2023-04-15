@@ -10,11 +10,11 @@ In our website project, you can use the SHA256 algorithm to generate digital sig
 In addition to digital signatures, there are other methods you can use to secure online transactions, such as SSL/TLS encryption, multi-factor authentication, and fraud detection algorithms. SSL/TLS encryption uses public-key cryptography to encrypt data sent over the internet, preventing eavesdropping and tampering. Multi-factor authentication involves using multiple factors, such as a password and a biometric identifier, to verify the identity of a user. Fraud detection algorithms use machine learning and data analytics to identify suspicious patterns and prevent fraudulent transactions.
 
 Overall, our fintech website project is focused on providing a secure and trustworthy platform for online transactions, using advanced cryptographic and security techniques to protect user data and prevent fraud. By implementing these techniques, you can build trust with your users and provide them with the peace of mind they need to conduct online transactions safely and securely.
-(2) Our team add a story unique feature in website , when any user sucessfully doing thier transaction then automatic sucessfully transaction story will create and that story only seen by account user.
+(2) Our team add a story unique feature in website , when any user successfully doing thier transaction then automatic successfully transaction story will create and that story only seen by account user.
 (3) Another unique feature add by our is to read all latest news related to politics , finance , share marker and many more.
 
 (4)The payment GateWay that we used is of test mode not original gateway , because of some reasons company refuse to give thier patment Gateway , So for demo we used Test mode gateway.
-(5) All my team member's give thier best and we make our website (60%) sucessfully , not 100% sucessfull because we are not able implement SHA256 algorithm process into our website as our code work perfectly and gnerate digital signature also but due to not attach it with website our website is not 100% done, but surelly in upcoming days we will implement SHA256 algorithm into our website.
+(5) All my team member's give thier best and we make our website (60%) sucessfully , not 100% sucessfully because we are not able implement SHA256 algorithm process into our website as our code work perfectly and gnerate digital signature also but due to not attach it with website our website is not 100% done, but surely in upcoming days we will implement SHA256 algorithm into our website.
 
 
 
