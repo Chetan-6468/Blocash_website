@@ -12,3 +12,6 @@ In addition to digital signatures, there are other methods you can use to secure
 Overall, our fintech website project is focused on providing a secure and trustworthy platform for online transactions, using advanced cryptographic and security techniques to protect user data and prevent fraud. By implementing these techniques, you can build trust with your users and provide them with the peace of mind they need to conduct online transactions safely and securely.
 
 
+
+
+front-end video link of the webiste:  https://drive.google.com/file/d/15l_ZuO4eY8gIp1sxJ9b6ojiSGRDAIr1c/view?usp=sharing
