@@ -77,12 +77,12 @@
         <span class="ml-3 text-xl">Blocash</span>
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <a href="register_form.php" target="_blank" class="mr-5 hover:bg-gray-200">signup</a>
+        <a href="register_form.php" target="_blank" class="mr-5 hover:bg-gray-200">Sign Up</a>
         
-        <a href="news.html" target="_blank" class="mr-5 hover:bg-gray-200">finance News</a>
+        <a href={% url 'finews' %} target="_blank" class="mr-5 hover:bg-gray-200">Finance News</a>
 
         <a href={% url 'about' %} class="mr-5 hover:bg-gray-200">About</a>
-        <a href="contact-us.html"class="mr-5 hover:bg-gray-200">Support</a>
+        <a href={% url 'contact-us' %} class="mr-5 hover:bg-gray-200">Support</a>
       </nav>
     <a href="login_form.php" target="_blank" class="inline-flex items-center bg-yellow-400 border-0 py-1 px-9 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Login
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -505,7 +505,7 @@
           <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Company</h2>
           <nav class="list-none mb-10">
             <li>
-              <a href="about-us.html" class="text-gray-600 hover:text-gray-800">About us</a>
+              <a href={% url 'about' %} class="text-gray-600 hover:text-gray-800">About us</a>
             </li>
             <li>
               <a class="text-gray-600 hover:text-gray-800">All resources</a>
@@ -522,7 +522,7 @@
           <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Support</h2>
           <nav class="list-none mb-10">
             <li>
-              <a href="contact-us.html"  class="text-gray-600 hover:text-gray-800">Contact us</a>
+              <a href={% url 'contact-us' %}  class="text-gray-600 hover:text-gray-800">Contact us</a>
             </li>
             <li>
               <a class="text-gray-600 hover:text-gray-800">Customer service</a>
@@ -539,13 +539,13 @@
           <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Explore more</h2>
           <nav class="list-none mb-10">
             <li>
-              <a href="blockchain.html" class="text-gray-600 hover:text-gray-800">Block chain</a>
+              <a href={% url 'blockchain' %} class="text-gray-600 hover:text-gray-800">Block chain</a>
             </li>
             <li>
-              <a href="financenews.html" class="text-gray-600 hover:text-gray-800">finance news</a>
+              <a href={% url 'finance_news' %} class="text-gray-600 hover:text-gray-800">Finance news</a>
             </li>
             <li>
-              <a class="text-gray-600 hover:text-gray-800">story</a>
+              <a class="text-gray-600 hover:text-gray-800">Story</a>
             </li>
             <li>
               <a class="text-gray-600 hover:text-gray-800">Press</a>
@@ -556,13 +556,13 @@
           <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">legal</h2>
           <nav class="list-none mb-10">
             <li>
-              <a href="privacy policy.html "class="text-gray-600 hover:text-gray-800">Privacy policy</a>
+              <a href={% url 'privacy' %} class="text-gray-600 hover:text-gray-800">Privacy policy</a>
             </li>
             <li>
-              <a href="disclaimer.html" class="text-gray-600 hover:text-gray-800">Disclaimer</a>
+              <a href={% url 'disc' %} class="text-gray-600 hover:text-gray-800">Disclaimer</a>
             </li>
             <li>
-              <a href="terms&condition.html"class="text-gray-600 hover:text-gray-800">Terms & conditions</a>
+              <a href={% url 'terms' %} class="text-gray-600 hover:text-gray-800">Terms & conditions</a>
             </li>
             <li>
               <a class="text-gray-600 hover:text-gray-800">Public disclosure</a>

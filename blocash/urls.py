@@ -22,5 +22,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.landing),
     path('about-us/',views.about,name='about'),
+    path('disc/',views.disc,name='disc'),
+    path('finews/',views.finews,name='finews'),
+    path('priv_pol/',views.priv_pol,name='privacy'),
+    path('t&c/',views.terms,name='terms'),
+    path('blockchain/',views.blocks,name='blockchain'),
+    path('finance_news/',views.finance_news,name='finance_news'),
+    path('contact/',views.contact,name='contact-us'),
     path('transact/',views.transact,name='transact'),
 ]
