@@ -34,3 +34,4 @@ message_string = f"Transaction ID: {transaction['transaction_id']}\n" \
 
 # Print the message string
 print(message_string)
+print("Hello world")
