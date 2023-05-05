@@ -5,9 +5,14 @@ from django.http import HttpResponse
 # Trasaction form rendering and handling
 def transact(request):
     if request.method == 'POST':
-        pass
+        input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address']
+        dict_data = {}
+        for i in input_names:
+            data = request.POST[i]
+            dict_data[i] = data
+        print(dict_data)
     else:
-        return render(request,"index.html")
+        return render(request,"details.html")
 
 def landing(request):
     return render(request,"Blocash.html")
