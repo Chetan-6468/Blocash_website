@@ -1,80 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Generate SHA256 Hash</title>
-    
-    <!-- CSS styles -->
-    <style>
-      label {
-        display: block;
-        margin-top: 10px;
-      }
-      input[type="text"],
-      input[type="email"],
-      input[type="number"] {
-        width: 100%;
-        padding: 8px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        margin-top: 5px;
-      }
-      button[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-      button[type="submit"]:hover {
-        background-color: #45a049;
-      }
 
-      .center{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            
-        }
-    </style>
-  </head>
-  <body>
-    <img src="/static/img/logos.jpg.png" alt="logo" height="60px" width="60px" class="center"> 
+<head>
+  <meta charset="UTF-8">
+  <title>Generate SHA256 Hash</title>
 
-    <link rel="shortcut icon" href="logos.jpg.png">
+  <!-- CSS styles -->
+  <style>
+    label {
+      display: block;
+      margin-top: 10px;
+    }
 
-    <form id="transaction_form">
-        <label for="transaction_id">Transaction ID:</label>
-        <input type="text" id="transaction_id" name="transaction_id"><br>
-  
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount"><br>
-  
-        <label for="payer_name">Payer Name:</label>
-        <input type="text" id="payer_name" name="payer_name"><br>
-  
-        <label for="payer_email">Payer Email:</label>
-        <input type="email" id="payer_email" name="payer_email"><br>
-  
-        <label for="payer_address">Payer Address:</label>
-        <input type="text" id="payer_address" name="payer_address"><br>
-  
-        <label for="payee_name">Payee Name:</label>
-        <input type="text" id="payee_name" name="payee_name"><br>
-  
-        <label for="payee_email">Payee Email:</label>
-        <input type="email" id="payee_email" name="payee_email"><br>
-  
-        <label for="payee_address">Payee Address:</label>
-        <input type="text" id="payee_address" name="payee_address"><br>
-  
-        <button type="submit" id="generate_hash_button">Generate Hash</button>
-      </form>
-  
-      <script>
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-top: 5px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+  </style>
+</head>
+
+<body>
+  <img src="/static/img/logos.jpg.png" alt="logo" height="60px" width="60px" class="center">
+
+  <link rel="shortcut icon" href="logos.jpg.png">
+
+  <form id="transaction_form">
+    {% csrf_token %}
+    <label for="transaction_id">Transaction ID:</label>
+    <input type="text" id="transaction_id" name="transaction_id" value={{transaction_id}} contenteditable="false"
+      readonly><br>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount"><br>
+
+    <label for="payer_name">Payer Name:</label>
+    <input type="text" id="payer_name" name="payer_name"><br>
+
+    <label for="payer_email">Payer Email:</label>
+    <input type="email" id="payer_email" name="payer_email"><br>
+
+    <label for="payer_address">Payer Address:</label>
+    <input type="text" id="payer_address" name="payer_address"><br>
+
+    <label for="payee_name">Payee Name:</label>
+    <input type="text" id="payee_name" name="payee_name"><br>
+
+    <label for="payee_email">Payee Email:</label>
+    <input type="email" id="payee_email" name="payee_email"><br>
+
+    <label for="payee_address">Payee Address:</label>
+    <input type="text" id="payee_address" name="payee_address"><br>
+
+    <button type="submit" id="generate_hash_button">Generate Hash</button>
+  </form>
+
+
+
+  <!-- <script>
         document.getElementById('transaction_form').addEventListener('submit', function(event) {
           event.preventDefault();
           
@@ -114,61 +123,145 @@
               // Display message string in an alert box
               alert(messageString);
             })
-            .catch(err => console.error(err));
+            .catch(err => console.e// Define the string to encrypt
+const stringToEncrypt = "This is a test string.";
+
+// Generate a random encryption key
+const encryptionKey = window.crypto.subtle.generateKey(
+  {name: "AES-GCM", length: 256},
+  true,
+  ["encrypt", "decrypt"]
+);
+
+// Convert the string to a Uint8Array
+const data = new TextEncoder().encode(stringToEncrypt);
+
+// Generate a random initialization vector
+const iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+// Define the encryption algorithm
+const algorithm = {name: "AES-GCM", iv: iv};
+
+// Encrypt the data using the key and algorithm
+window.crypto.subtle.encrypt(algorithm, encryptionKey, data)
+  .then(encryptedData => {
+    // Encode the encrypted data as a Base64 string
+    const base64EncodedData = btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
+    console.log(`Encrypted string: ${base64EncodedData}`);
+  });
+rror(err));
         });
-      </script>
-    </body>
-  </html>
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+      </script> -->
+  <script>
+
+    // Define the string to encrypt
+    const stringToEncrypt = [
+      document.getElementById('transaction_id').value, 
+      parseFloat(document.getElementById('amount').value), 
+      document.getElementById('payer_name').value  , 
+      document.getElementById('payer_email').value, 
+      document.getElementById('payer_address').value, 
+      document.getElementById('payee_name').value,
+      document.getElementById('payee_email').value, 
+      document.getElementById('payee_address').value,
+      document.getElementById('csrfmiddlewaretoken').value
+    ];
+    
+    const transaction = {
+            "transaction_id": document.getElementById('transaction_id').value,
+            "amount": parseFloat(document.getElementById('amount').value),
+            "csrfmiddlewaretoken" : document.getElementById('csrfmiddlewaretoken').value,
+            "payer": {
+              "name": document.getElementById('payer_name').value,
+              "email": document.getElementById('payer_email').value,
+              "address": document.getElementById('payer_address').value
+            },
+            "payee": {
+              "name": document.getElementById('payee_name').value,
+              "email": document.getElementById('payee_email').value,
+              "address": document.getElementById('payee_address').value
+            }
+          };
+
+    // Generate a random encryption key
+    const encryptionKey = window.crypto.subtle.generateKey(
+      { name: "AES-GCM", length: 256 },
+      true,
+      ["encrypt", "decrypt"]
+    ).then(key => {
+      const encrypted_data = []
+      for (let index = 0; index < stringToEncrypt.length; index++) {
+        // Convert the string to a Uint8Array
+        const data = new TextEncoder().encode(stringToEncrypt[index]);
+
+        // Generate a random initialization vector
+        const iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+        // Define the encryption algorithm
+        const algorithm = { name: "AES-GCM", iv: iv };
+
+        // Encrypt the data using the key and algorithm
+        window.crypto.subtle.encrypt(algorithm,key, data)
+          .then(encryptedData => {
+            
+            // Encode the encrypted data as a Base64 string
+            const base64EncodedData = btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
+            encrypted_data[index] = base64EncodedData;
+          }).catch(error => console.error(error));
+      }
+      console.log(encrypted_data)
+    }).catch(error => console.error(error));
+  </script>
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script type="text/javascript">
-    function pay_now(){
-          //get the input from the form
-          var name = $("#payee_name").val();
-          var amount = $("#amount").val();
-          var actual_amount = amount*100;
-          var description = $('#description').val();
-          //var actual_amount = amount;
-          var options = {
-            "key": "rzp_test_L4GMUF5029ghIw", // Enter the Key ID generated from the Dashboard
-            "amount": actual_amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-            "currency": "INR",
-            "name": name,
-            "description": description,
-            "image": "razorpay.png",
-            //"order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "handler": function (response){
-                console.log(response);
-                $.ajax({
- 
-                    url: 'process_payment.php',
-                    'type': 'POST',
-                    'data': {'payment_id':response.razorpay_payment_id,'amount':actual_amount,'name':name},
-                    success:function(data){
-                        console.log(data);
-                      window.location.href = 'thank_you.php';
-                    }
- 
-                });
-                // alert(response.razorpay_payment_id);
-                // alert(response.razorpay_order_id);
-                // alert(response.razorpay_signature)
-            },
-             
-        };
-        var rzp1 = new Razorpay(options);
-        rzp1.on('payment.failed', function (response){
-                alert(response.error.code);
-                alert(response.error.description);
-                alert(response.error.source);
-                alert(response.error.step);
-                alert(response.error.reason);
-                alert(response.error.metadata.order_id);
-                alert(response.error.metadata.payment_id);
+  function pay_now() {
+    //get the input from the form
+    var name = $("#payee_name").val();
+    var amount = $("#amount").val();
+    var actual_amount = amount * 100;
+    var description = $('#description').val();
+    //var actual_amount = amount;
+    var options = {
+      "key": "rzp_test_L4GMUF5029ghIw", // Enter the Key ID generated from the Dashboard
+      "amount": actual_amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": name,
+      "description": description,
+      "image": "razorpay.png",
+      //"order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+        console.log(response);
+        $.ajax({
+
+          url: 'process_payment.php',
+          'type': 'POST',
+          'data': { 'payment_id': response.razorpay_payment_id, 'amount': actual_amount, 'name': name },
+          success: function (data) {
+            console.log(data);
+            window.location.href = 'thank_you.php';
+          }
+
         });
-        document.getElementById('rzp-button1').onclick = function(e){
-            rzp1.open();
-            e.preventDefault();
-        }
+      },
+
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function (e) {
+      rzp1.open();
+      e.preventDefault();
     }
+  }
 </script>
