@@ -21,6 +21,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.landing),
+    path('register/',views.register,name='register'),
+    path('profile/',views.profile,name='profile'),
+    path('login/',views.logon,name='login'),
+    path('logoff/',views.logoff,name='logoff'),
     path('about-us/',views.about,name='about'),
     path('disc/',views.disc,name='disc'),
     path('finews/',views.finews,name='finews'),

@@ -89,18 +89,18 @@
         const newsType = document.getElementById("newsType");
         const newsdetails = document.getElementById("newsdetails");
 
-        // Array
-        var newsDataArr = [];
 
         // apis 
-        const API_KEY = "9e9b7d1c2042476586e5d3584b6e7cab";
-        const HEADLINES_NEWS = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
+        const API_KEY = "pub_21771e76a72126f950e9aa28961d45d53be97";
+        const HEADLINES_NEWS = "https://newsdata.io/api/1/news?apikey=";
         const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=";
         const BUSINESS_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=";
         const SPORTS_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=";
         const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=";
         const TECHNOLOGY_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=technology&pageSize=8&apiKey=";
         const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
+
+
 
         window.onload = function () {
             newsType.innerHTML = "<h4>Headlines</h4>";
@@ -135,11 +135,11 @@
         });
 
         const fetchHeadlines = async () => {
-            const response = await fetch(HEADLINES_NEWS + API_KEY);
+            const response = await fetch(HEADLINES_NEWS + API_KEY + "&q=pegasus&language=en");
             newsDataArr = [];
             if (response.status >= 200 && response.status < 300) {
                 const myJson = await response.json();
-                newsDataArr = myJson.articles;
+                newsDataAr = Array.from(myJson);
             } else {
                 // handle errors
                 console.log(response.status, response.statusText);
@@ -147,7 +147,7 @@
                 return;
             }
 
-            displayNews();
+            displayNews(newsDataArr);
         }
 
 
@@ -164,7 +164,7 @@
                 return;
             }
 
-            displayNews();
+            displayNews(newsDataArr);
         }
 
         const fetchBusinessNews = async () => {
@@ -238,63 +238,27 @@
             displayNews();
         }
 
-        function displayNews() {
 
-            newsdetails.innerHTML = "";
 
-            // if(newsDataArr.length == 0) {
-            //     newsdetails.innerHTML = "<h5>No data found.</h5>"
-            //     return;
-            // }
+        function displayNews(news) {
+            const newsContainer = document.getElementById("news-container");
 
-            newsDataArr.forEach(news => {
+            // Create a new card for each news item
+            const card = document.createElement("div");
+            card.className = "card";
 
-                var date = news.publishedAt.split("T");
+            // Add the news headline to the card
+            const headline = document.createElement("h3");
+            headline.textContent = news.headline;
+            card.appendChild(headline);
 
-                var col = document.createElement('div');
-                col.className = "col-sm-12 col-md-4 col-lg-3 p-2 card";
+            // Add the news description to the card
+            const description = document.createElement("p");
+            description.textContent = news.description;
+            card.appendChild(description);
 
-                var card = document.createElement('div');
-                card.className = "p-2";
-
-                var image = document.createElement('img');
-                image.setAttribute("height", "matchparent");
-                image.setAttribute("width", "100%");
-                image.src = news.urlToImage;
-
-                var cardBody = document.createElement('div');
-
-                var newsHeading = document.createElement('h5');
-                newsHeading.className = "card-title";
-                newsHeading.innerHTML = news.title;
-
-                var dateHeading = document.createElement('h6');
-                dateHeading.className = "text-primary";
-                dateHeading.innerHTML = date[0];
-
-                var discription = document.createElement('p');
-                discription.className = "text-muted";
-                discription.innerHTML = news.description;
-
-                var link = document.createElement('a');
-                link.className = "btn btn-dark";
-                link.setAttribute("target", "_blank");
-                link.href = news.url;
-                link.innerHTML = "Read more";
-
-                cardBody.appendChild(newsHeading);
-                cardBody.appendChild(dateHeading);
-                cardBody.appendChild(discription);
-                cardBody.appendChild(link);
-
-                card.appendChild(image);
-                card.appendChild(cardBody);
-
-                col.appendChild(card);
-
-                newsdetails.appendChild(col);
-            });
-
+            // Add the card to the container
+            newsContainer.appendChild(card);
         }
     </script>
 </body>
