@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from . forms import form_dummy
 import json,hashlib,secrets,string
 
 # Trasaction form rendering and handling
 def transact(request):
     if request.method == 'POST':
-        input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address']
+        input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address','value']
         dict_data = {}
         for i in input_names:
             data = request.POST[i]
             dict_data[i] = data
-
+        print(dict_data)
         # Define transaction details
         transaction = {
             "transaction_id": dict_data['transaction_id'],
@@ -53,7 +54,8 @@ def about(request):
 
 
 def contact(request):
-    return render(request,"contact-us.html")
+    f = form_dummy()
+    return render(request,"contact-us.html",{'form':f})
 
 def priv_pol(request):
     return render(request,"privacy policy.html")
