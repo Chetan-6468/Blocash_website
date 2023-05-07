@@ -5,37 +5,111 @@
 <head>
 	<title>Profile / Blocash</title>
 
-	<!-- Meta tags start -->
-	<meta charset="utf-8" />
-	<meta http-equiv="window-target" content="_top">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-	<meta name="keywords" content="" />
-	<meta name="description" content="Kite connect developer dashboard" />
-	<meta name="author" content="Kite connect" />
     <link rel="shortcut icon" href="/static/img/logos.jpg.png">
 
 	
-	<!-- Meta tags end -->
-
-	
-	<!-- For IE 9 and below -->
-	<!--[if IE]><link rel="shortcut icon" href="static/images/favicon.ico"><![endif]-->
-	<!-- Touch Icons - iOS and Android 2.1+ 180x180 pixels in size. -->
-	<link rel="apple-touch-icon-precomposed" href="/static/images/apple-icon-precomposed.png">
-	<!-- Firefox, Chrome, Safari, IE 11+ and Opera. 196x196 pixels in size. -->
-	<link rel="icon" href="/static/images/favicon.png">
-	<link rel="stylesheet" href="/static/js/jquery-ui-1.11.4.custom/jquery-ui.min.css" type="text/css" />
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css" />
-	
 	<link rel="stylesheet" href="profile.css" type="text/css" />
 
-	<script src="/static/js/app.js"></script>
-	<script>var ROOT = "/"; </script>
+
+	<style>
+		/* body styles */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #f9f9f9;
+}
+
+/* header styles */
+.header {
+    background-color: #fff;
+    border-bottom: 2px solid #ccc;
+    padding: 10px 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.logo a {
+    color: #333;
+    text-decoration: none;
+    font-size: 24px;
 	
+}
+
+/* form styles */
+.profile-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(239, 148, 21, 0.1);
+}
+
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.columns {
+    display: inline-block;
+    width: 48%;
+    margin-right: 4%;
+}
+
+.columns:last-child {
+    margin-right: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    height: 40px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+.helptext {
+    color: #999;
+    font-size: 12px;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+	</style>
 
 </head>
 <body class="profile">
@@ -89,12 +163,7 @@
 					</label>
 					<input type="text" name="phone" value="8989897867" required id="id_phone" maxlength="10" />
 				</div>
-				<div class="columns six">
-					<label for="id_website">
-						Website
-					</label>
-					<input type="text" name="website" placeholder="https://" id="id_website" maxlength="100" />
-				</div>
+				
 			</div>
 
 			<div class="row">
