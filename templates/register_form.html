@@ -13,10 +13,11 @@
    
 <div class="form-container">
 
-   <form action="" method="post">
+   <form action="/register/" method="post" >
    <a href="/"><img src="/static/img/logos.jpg.png" alt="blocash" height="50px" width="50px" />
 								</a>
       <h3><b>Blocash</b></h3>
+      {% csrf_token %}
       <input type="text" name="username" required placeholder="Choose a username">
       <input type="text" name="name" required placeholder="enter your first name">
       <input type="text" name="lname"  placeholder="enter your last name">
