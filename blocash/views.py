@@ -99,8 +99,8 @@ def register(request):
             'password2': request.POST['password2']
         }
     
-        form = UserCreationForm(data)
-        if form.is_valid():
+        # form = UserCreationForm(data)
+        if data['password1'] == data['password2']:
             User.objects.create(
                     username = data['username'],
                     email = data['email'],
@@ -110,10 +110,9 @@ def register(request):
                     )
             message = "You are registered successfully !!"
             messages.success(request,message)
-            return render(
-                request,"login_form.html")
+            return render(request,"login_form.html")
         else:
-            messages.error(request,form.error_messages)
+            messages.error(request,"Passwords are not same !!")
             return render(request,"register_form.html")
     else:
         return render(request, "register_form.html")
