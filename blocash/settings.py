@@ -20,12 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4-9n!oahm16$=*#)0%8f=&nth&z=-*7vzwd50924+ot3l2i8%x'
+SECRET_KEY = 'bhebhdbh3b27udh32bu849hf48b8h7(7H&&H(h&&$C@VU^@V^!F@%fu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.28.223.143','127.0.0.1']
+
+ALLOWED_HOSTS = ['35.225.9.149']
 
 
 # Application definition
@@ -73,13 +74,17 @@ WSGI_APPLICATION = 'blocash.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "blocash-db",
+        "PASSWORD": "enGlish02@python",
+        "HOST": "34.172.163.118",
+        "PORT": "5432",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -118,7 +123,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+	BASE_DIR / "static",
+	"/home/sidhack999/Blocash_website/static"
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
