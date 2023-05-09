@@ -1,112 +1,40 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>login form</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login form</title>
 
-   <!-- custom css file link  -->
-  
-   <link rel="shortcut icon" href="/static/img/logos.jpg.png">
-<style>
-   /* Body styles */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-}
-
-.center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-}
-
-
-/* Form styles */
-.form-container {
-  max-width: 400px;
-  margin: 50px auto;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-}
-
-h3 {
-  margin: 0 0 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-input[type="email"],
-input[type="password"] {
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  outline: none;
-}
-
-input[type="submit"] {
-  background-color: #f5a800;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-input[type="submit"]:hover {
-  background-color: #e2c230;
-}
-
-p {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-</style>
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="/static/css/login.css">
+  <link rel="shortcut icon" href="/static/img/logos.jpg.png">
 </head>
-<body>
-   
-<div class="form-container">
-<img src="/static/img/logos.jpg.png" alt="logo"height="60px" width="60px" class="center">
-   <form action="" method="post">
-      <h3>login now</h3>
-  
-      <input type="email" name="email" required placeholder="enter your email">
-      <input type="password" name="password" required placeholder="enter your password">
-      <input type="submit" name="submit" value="login now" class="form-btn">
-      <p>don't have an account? <a href="register_form.php">register now</a></p>
-   </form>
 
-</div>
+<body>
+
+  <div class="form-container">
+    <img src="/static/img/logos.jpg.png" alt="logo" height="60px" width="60px" class="center">
+    <form action="/login/" method="post">
+      <h3>Login now</h3>
+      {% csrf_token %}
+      <input type="text" name="username" required placeholder="Username">
+      <input type="password" name="password" required placeholder="Password">
+      <input type="submit" name="submit" value="login now" class="form-btn">
+      <p>Don't have an account? <a href={% url 'register' %}>register now</a></p>
+    </form>
+
+  </div>
+  
+  {% if messages %}
+  <script>
+    {% for message in messages %}
+    alert('{{ message }}');
+    {% endfor %}
+  </script>
+  {% endif %}
 
 </body>
+
 </html>
