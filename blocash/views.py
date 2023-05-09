@@ -100,12 +100,15 @@ def register(request):
         
         form = UserCreationForm(data)
         if form.is_valid():
+            temp = {
+                        data['first_name'],
+                        data['last_name']
+                    }
             User.objects.create_user(
                     data['username'],
                     data['email'],
                     data['password1'],
-                    data['first_name'],
-                    data['last_name']
+                    temp    
                     )
             message = "You are registered successfully !!"
             user_login = AuthenticationForm()
