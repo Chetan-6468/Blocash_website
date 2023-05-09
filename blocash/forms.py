@@ -17,5 +17,10 @@ class ContactForm(forms.Form):
         self.fields['website'].widget.attrs.update({'autocomplete': 'off'})
 
 
-class form_dummy(forms.Form):
-    name = forms.CharField(max_length=56,required=True)
+class User_Detail(forms.Form):
+    uid = forms.CharField(max_length=50,required=True)
+    fname = forms.CharField(max_length=50,required=True)
+    mname = forms.CharField(max_length=50)
+    lname = forms.CharField(max_length=50)
+    email = forms.EmailField(required=True)
+

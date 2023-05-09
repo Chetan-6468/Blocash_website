@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from . forms import ContactForm
+from . forms import ContactForm,User_Detail
 from django.contrib.auth import login,logout
-import json,hashlib,secrets,string
+import json,hashlib,secrets,string,requests,json
 
 # Trasaction form rendering and handling
 def transact(request):
@@ -79,7 +79,13 @@ def finance_news(request):
     return render(request,"financenews.html")
 
 def finews(request):
-    return render(request,"news.html")
+    API_KEY = "pub_21771e76a72126f950e9aa28961d45d53be97"
+    URL = "https://newsdata.io/api/1/news?apikey=pub_21771e76a72126f950e9aa28961d45d53be97&q=pegasus&language=en"
+
+    res = requests.get(URL)
+    json_res = res.json()
+    news_array = json_res['results']
+    return render(request,"news.html",{'news':news_array})
 
 def register(request):
     if request.method == 'POST':
@@ -92,7 +98,9 @@ def register(request):
         form = UserCreationForm(data)
         if form.is_valid():
             form.save()
-            return HttpResponse("Saved Successfully")
+            message = "You are registered successfully !!"
+            user_login = AuthenticationForm()
+            return render(request,"login.html",{'message':message,'form' : user_login})
         else:
             return render(request,"register.html",{'error':form.errors})
     else:
@@ -105,6 +113,8 @@ def logon(request):
             'username': request.POST['username'],
             'password': request.POST['password']
         }
+
+        print(data)
         form = AuthenticationForm(request,data)
 
         if form.is_valid():
