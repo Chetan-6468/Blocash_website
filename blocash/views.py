@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from . forms import ContactForm
+from . forms import ContactForm,User_Detail
 from django.contrib.auth import login,logout
 import json,hashlib,secrets,string,requests,json
 
@@ -113,6 +113,8 @@ def logon(request):
             'username': request.POST['username'],
             'password': request.POST['password']
         }
+
+        print(data)
         form = AuthenticationForm(request,data)
 
         if form.is_valid():
