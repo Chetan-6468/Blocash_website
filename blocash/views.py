@@ -133,7 +133,7 @@ def logoff(request):
     
 def profile(request):
     if request.user.is_authenticated :
-        form = ContactForm()
-        return render(request,"profile.html",{'form':form})
+        # form = ContactForm()
+        return render(request,"dashboard.html")
     else :
         return redirect("/login/")
