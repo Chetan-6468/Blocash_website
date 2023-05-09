@@ -100,15 +100,13 @@ def register(request):
         
         form = UserCreationForm(data)
         if form.is_valid():
-            temp = {
-                    'first_name':data['first_name'],
-                    'last_name' :    data['last_name']
-                    }
-            User.objects.create_user(
-                    data['username'],
-                    data['email'],
-                    data['password1'],
-                    temp)
+            User.objects.create(
+                    username = data['username'],
+                    email = data['email'],
+                    password = data['password1'],
+                    first_name = data['first_name'],
+                    last_name = data['last_name']
+                    )
             message = "You are registered successfully !!"
             user_login = AuthenticationForm()
             return render(request,"login.html",{'message':message,'form' : user_login})
