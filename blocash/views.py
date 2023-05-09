@@ -124,7 +124,7 @@ def logon(request):
             'password': request.POST['password']
         }
 
-        if authenticate(data) is not None:
+        if authenticate(**data) is not None:
             user = User.objects.filter(username=data['username'])[0]
             login(request,user)
             messages.success(request,"You are success fully logged in !!")
