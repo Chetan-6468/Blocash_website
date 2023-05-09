@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Un | Blocash</title>
+    <style>
+        form {
+            max-width: 500px;
+            max-height: max-content;
+            margin: auto;
+            margin-top: 7%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            background-color: #ffffff;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            margin-top: 5%;
+            margin-left: 5%;
+            border: none;
+            border-bottom: 2px solid #000000;
+            border-radius: 0px;
+            align-self: flex-start;
+            width: 65%;
+        }
+
+        input[type="submit"] {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .helptext {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 5px;
+            
+        }
+        input:invalid + .helptext {
+  display: block;
+}
+
+input:valid + .helptext {
+  display: none;
+}
+
+
+        label {
+            color: #000000;
+            font-weight: bold;
+            align-self: flex-start;
+            margin-left: 5%;
+        }
+
+        th {
+            width: 150px;
+            text-align: left;
+        }
+
+        td {
+            padding-top: 10px;
+        }
+
+        button[type="submit"] {
+            margin-top: 5%;
+            background-color: #f9c846;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #000000;
+            color: #f9c846;
+        }
+
+        h4 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form action="/register/" method="post">
+        <h4>Sign Up</h4>
+        {% csrf_token %}
+        {{form}}
+
+        <br>
+        <button type="submit">Signup</button>
+    </form>
+    {{error}}
+</body>
+
+</html>

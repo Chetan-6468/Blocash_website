@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <!-- head start -->
+
 <head>
 	<title>Profile / Blocash</title>
+
 
     <link rel="shortcut icon" href="/static/img/logos.jpg.png">
 
@@ -111,50 +112,71 @@ input[type="submit"]:hover {
 
 	</style>
 
+	<!-- Meta tags start -->
+	<meta charset="utf-8" />
+	<meta http-equiv="window-target" content="_top">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="Kite connect developer dashboard" />
+	<meta name="author" content="Kite connect" />
+	<link rel="shortcut icon" href="/static/img/logos.jpg.png">
+
+
+	<!-- Meta tags end -->
+
+
+	<!-- For IE 9 and below -->
+	<!--[if IE]><link rel="shortcut icon" href="static/images/favicon.ico"><![endif]-->
+	<!-- Touch Icons - iOS and Android 2.1+ 180x180 pixels in size. -->
+	<link rel="apple-touch-icon-precomposed" href="/static/images/apple-icon-precomposed.png">
+	<!-- Firefox, Chrome, Safari, IE 11+ and Opera. 196x196 pixels in size. -->
+	<link rel="icon" href="/static/images/favicon.png">
+	<link rel="stylesheet" href="/static/js/jquery-ui-1.11.4.custom/jquery-ui.min.css" type="text/css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" href="profile.css" type="text/css" />
+
+	<script src="/static/js/app.js"></script>
+	<script>var ROOT = "/"; </script>
+
+
+
 </head>
+
 <body class="profile">
-	
+
 	<header class="header inner">
 		<div class="container">
 			<div class="row">
 				<div class="logo three columns">
-					<a href="/"><img src="/static/img/logos.jpg.png" alt="Blocash" height="50px" width="50px"/>    <b>Blocash</b></a>
+					<a href="/"><img src="/static/img/logos.jpg.png" alt="Blocash" height="50px" width="50px" />
+						<b>Blocash</b></a>
 				</div>
+
 				
 			</div>
 		</div>
+		
 	</header>
-	
+
 
 	<div class="container wrap">
 		<div class="row">
-			
+			<a href={% url 'logoff' %}> Logout </a>
 
 			<div id="main">
 				<div class="content">
-					
-
-
-					
-
-<div class="profile-container">
-	<h1 class="page-title">Profile</h1>
-	<form method="post" action="", autocomplete="off">
-			<input type='hidden' name='csrfmiddlewaretoken' value='58qAD4CoOnJ32UZSIM1sDex4QfHQWQTGOfWzkOBn2hdMi7Sdce14gZsqiayclkUX' />
-			<div class="row">
-				<div class="columns six">
-					<label for="id_name">
-					Your name *
-					</label>
-					<input type="text" name="name" value="chewan" required id="id_name" maxlength="100" />
+					<div class="profile-container">
+						<h1 class="page-title">Profile</h1>
+						{{form}}					
 				</div>
-				<div class="columns six">
-					<label for="id_email">
-					E-mail *
-					</label>
-					<input type="text" name="email" value="ghjdgsja@gmail.com" required id="id_email" maxlength="100" />
-				</div>
+
 			</div>
+<<<<<<< HEAD
 
 			<div class="row">
 				<div class="columns six">
@@ -325,8 +347,13 @@ input[type="submit"]:hover {
 				</div>
 			</div><!-- main //-->
 		</div>
+=======
+		</div><!-- main //-->
+	</div>
+>>>>>>> ba59a96c9ea0a729f729cf6f8f7c4767cefdc4da
 	</div>
 
-	
+
 </body>
+
 </html>
