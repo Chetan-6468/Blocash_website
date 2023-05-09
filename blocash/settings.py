@@ -20,16 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4-9n!oahm16$=*#)0%8f=&nth&z=-*7vzwd50924+ot3l2i8%x'
+SECRET_KEY = 'bhebhdbh3b27udh32bu849hf48b8h7(7H&&H(h&&$C@VU^@V^!F@%fu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-<<<<<<< HEAD
+
 ALLOWED_HOSTS = ['35.225.9.149']
-=======
-ALLOWED_HOSTS = ['34.28.223.143','127.0.0.1']
->>>>>>> ed502832dac21ffeb1ab51039b5a8425516d6d96
 
 
 # Application definition
@@ -124,15 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-<<<<<<< HEAD
+
 STATICFILES_DIRS = [
 	BASE_DIR / "static",
 	"/home/sidhack999/Blocash_website/static"
-=======
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
->>>>>>> ed502832dac21ffeb1ab51039b5a8425516d6d96
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
