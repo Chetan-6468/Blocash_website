@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from . forms import ContactForm,User_Detail
-from django.contrib.auth import login,logout
+from django.contrib.auth import login,logout,authenticate
+from django.contrib import messages
 import json,hashlib,secrets,string,requests,json
 
 # Trasaction form rendering and handling
@@ -97,7 +98,7 @@ def register(request):
             'password1': request.POST['password1'],
             'password2': request.POST['password2']
         }
-        
+    
         form = UserCreationForm(data)
         if form.is_valid():
             User.objects.create(
@@ -108,13 +109,14 @@ def register(request):
                     last_name = data['last_name']
                     )
             message = "You are registered successfully !!"
-            user_login = AuthenticationForm()
-            return render(request,"login.html",{'message':message,'form' : user_login})
+            messages.success(request,message)
+            return render(
+                request,"login_form.html")
         else:
-            return render(request,"register_form.html",{'error':form.errors})
+            messages.error(request,form.error_messages)
+            return render(request,"register_form.html")
     else:
-        user_form = UserCreationForm()
-        return render(request, "register_form.html", {'form': user_form})
+        return render(request, "register_form.html")
 
 def logon(request):
     if request.method == 'POST':
@@ -123,18 +125,16 @@ def logon(request):
             'password': request.POST['password']
         }
 
-        print(data)
-        form = AuthenticationForm(request,data)
-
-        if form.is_valid():
+        if authenticate(**data) is not None:
             user = User.objects.filter(username=data['username'])[0]
             login(request,user)
+            messages.success(request,"You are success fully logged in !!")
             return redirect('/profile/')
-        else :
-            return HttpResponse(form.errors)
+        else:
+            messages.error(request,"Incorrect username or password !!")
+            return render(request,"login_form.html")
     else :
-        user_login = AuthenticationForm()
-        return render(request,"login.html",{'form':user_login})
+        return render(request,"login_form.html")
     
 def logoff(request):
     logout(request)
@@ -142,7 +142,8 @@ def logoff(request):
     
 def profile(request):
     if request.user.is_authenticated :
-        # form = ContactForm()
-        return render(request,"dashboard.html")
+        my_user = User.objects.filter(username = str(request.user.username))[0]
+        name = my_user.first_name + " " + my_user.last_name
+        return render(request,"dashboard.html",{'name':name.upper()})
     else :
         return redirect("/login/")

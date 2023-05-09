@@ -54,6 +54,12 @@
    </form>
 
 </div>
-
+{% if messages %}
+<script>
+  {% for message in messages %}
+  alert('{{ message }}');
+  {% endfor %}
+</script>
+{% endif %}
 </body>
 </html>
