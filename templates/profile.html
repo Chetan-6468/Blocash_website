@@ -5,6 +5,113 @@
 <head>
 	<title>Profile / Blocash</title>
 
+
+    <link rel="shortcut icon" href="/static/img/logos.jpg.png">
+
+	
+	<link rel="stylesheet" href="profile.css" type="text/css" />
+
+
+	<style>
+		/* body styles */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #f9f9f9;
+}
+
+/* header styles */
+.header {
+    background-color: #fff;
+    border-bottom: 2px solid #ccc;
+    padding: 10px 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.logo a {
+    color: #333;
+    text-decoration: none;
+    font-size: 24px;
+	
+}
+
+/* form styles */
+.profile-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(239, 148, 21, 0.1);
+}
+
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.columns {
+    display: inline-block;
+    width: 48%;
+    margin-right: 4%;
+}
+
+.columns:last-child {
+    margin-right: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    height: 40px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+.helptext {
+    color: #999;
+    font-size: 12px;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+	</style>
+
 	<!-- Meta tags start -->
 	<meta charset="utf-8" />
 	<meta http-equiv="window-target" content="_top">
@@ -35,6 +142,7 @@
 
 	<script src="/static/js/app.js"></script>
 	<script>var ROOT = "/"; </script>
+
 
 
 </head>
@@ -68,8 +176,181 @@
 				</div>
 
 			</div>
+<<<<<<< HEAD
+
+			<div class="row">
+				<div class="columns six">
+					<label for="id_phone">
+						Phone
+					</label>
+					<input type="text" name="phone" value="8989897867" required id="id_phone" maxlength="10" />
+				</div>
+				
+			</div>
+
+			<div class="row">
+					<label for="id_description">
+						About you:
+					</label>
+					<textarea name="description" id="id_description" rows="10" cols="40" maxlength="200"></textarea>
+			</div>
+
+
+			<div class="row">
+				<div class="six columns">
+					<label for="id_state">
+						State of residence <span class='helptext'>This is for the GST</span>
+					</label>
+					<select name="state" selectedindex="0" required id="id_state">
+  <option value=""></option>
+
+  <option value="1">ANDAMAN AND NICOBAR ISLANDS</option>
+
+  <option value="2" selected>ANDHRA PRADESH</option>
+
+  <option value="3">ARUNACHAL PRADESH</option>
+
+  <option value="4">ASSAM</option>
+
+  <option value="5">BIHAR</option>
+
+  <option value="6">CHANDIGARH</option>
+
+  <option value="7">DADRA &amp; NAGAR HAVELI</option>
+
+  <option value="8">DAMAN &amp; DIU</option>
+
+  <option value="9">DELHI</option>
+
+  <option value="10">GOA</option>
+
+  <option value="11">GUJARAT</option>
+
+  <option value="12">HARYANA</option>
+
+  <option value="13">HIMACHAL PRADESH</option>
+
+  <option value="14">JAMMU AND KASHMIR</option>
+
+  <option value="15">KARNATAKA</option>
+
+  <option value="16">KERALA</option>
+
+  <option value="17">LAKHSWADEEP</option>
+
+  <option value="18">MADHYA PRADESH</option>
+
+  <option value="19">MAHARASHTRA</option>
+
+  <option value="20">MANIPUR</option>
+
+  <option value="21">MEGHALAYA</option>
+
+  <option value="22">MIZORAM</option>
+
+  <option value="23">NAGALAND</option>
+
+  <option value="24">ORISSA</option>
+
+  <option value="25">PONDICHERRY</option>
+
+  <option value="26">PUNJAB</option>
+
+  <option value="27">RAJASTHAN</option>
+
+  <option value="28">SIKKIM</option>
+
+  <option value="29">TAMIL NADU</option>
+
+  <option value="30">TRIPURA</option>
+
+  <option value="31">UTTAR PRADESH</option>
+
+  <option value="32">WEST BENGAL</option>
+
+  <option value="33">CHHATTISGARH</option>
+
+  <option value="34">UTTARKHAND</option>
+
+  <option value="35">JHARKHAND</option>
+
+  <option value="36">UNION TERRITORY</option>
+
+  <option value="37">TELANGANA</option>
+
+  <option value="98">APO</option>
+
+</select>
+				</div>
+			</div>
+
+
+			<hr>
+
+			<div class="row">
+				<h4>Blocash ID</h4>
+			</div>
+
+			<div class="row">
+				<div class="six columns">
+					<label for="id_partner_id">
+						Blocash partner ID (optional)
+					</label>
+					<input type="text" name="partner_id" id="id_partner_id" maxlength="20" />
+				</div>
+				<div class="columns six">
+					<label for="">
+						
+					</label>
+					
+				</div>
+			</div>
+
+
+			<hr>
+
+			<div class="row">
+				<h4 class="page-title">Change password</h4>
+			</div>
+
+			<div class="row">
+				<div class="four columns">
+					<label for="id_old_password">
+						Old password
+					</label>
+					<input type="password" name="old_password" autocomplete="off" id="id_old_password" maxlength="100" />
+				</div>
+
+				<div class="four columns">
+					<label for="id_password">
+					New password
+					</label>
+					<input type="password" name="password" id="id_password" maxlength="230" />
+				</div>
+				<div class="four columns">
+					<label for="id_confirm_password">
+						Repeat password
+					</label>
+					<input type="password" name="confirm_password" id="id_confirm_password" maxlength="230" />
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="profile-update-button">
+					<input type="submit" class="button button-primary" value="Update" />
+				</p>
+			</div>
+		</div>
+	</form>
+</div>
+
+				</div>
+			</div><!-- main //-->
+		</div>
+=======
 		</div><!-- main //-->
 	</div>
+>>>>>>> ba59a96c9ea0a729f729cf6f8f7c4767cefdc4da
 	</div>
 
 
