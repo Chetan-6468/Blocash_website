@@ -91,21 +91,29 @@ def register(request):
     if request.method == 'POST':
         data = {
             'username': request.POST['username'],
+            'first_name' : request.POST['fname'],
+            'last_name' : request.POST['lname'],
+            'email' : request.POST['email'],
             'password1': request.POST['password1'],
             'password2': request.POST['password2']
         }
         
         form = UserCreationForm(data)
         if form.is_valid():
-            form.save()
+            temp = data['password1']
+            del data['password1']
+            del data['password2']
+            data['password'] = temp
+
+            User.objects.create(data)
             message = "You are registered successfully !!"
             user_login = AuthenticationForm()
             return render(request,"login.html",{'message':message,'form' : user_login})
         else:
-            return render(request,"register.html",{'error':form.errors})
+            return render(request,"register_form.html",{'error':form.errors})
     else:
         user_form = UserCreationForm()
-        return render(request, "register.html", {'form': user_form})
+        return render(request, "register_form.html", {'form': user_form})
 
 def logon(request):
     if request.method == 'POST':
