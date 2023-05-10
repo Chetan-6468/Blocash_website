@@ -3,55 +3,62 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from . forms import ContactForm,User_Detail
+from models.models import Wallet
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-import json,hashlib,secrets,string,requests,json
+import json,hashlib,secrets,string,requests,json,base64
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
 
-# Trasaction form rendering and handling
+@login_required
 def transact(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address','value']
-            dict_data = {}
-            for i in input_names:
-                data = request.POST[i]
-                dict_data[i] = data
-            print(dict_data)
-            # Define transaction details
-            transaction = {
-                "transaction_id": dict_data['transaction_id'],
-                "amount": dict_data['amount'],
-                "payer": {
-                    "name": dict_data['payer_name'],
-                    "email": dict_data['payer_email'],
-                    "address": dict_data['payer_address']
-                },
-                "payee": {
-                    "name": dict_data['payee_name'],
-                    "email": dict_data['payee_email'],
-                    "address": dict_data['payee_address']
-                }
-            }
-                    
-            # Convert transaction to a JSON string
-            transaction_string = json.dumps(transaction)
+    if request.method == 'POST':
+        input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address','value']
+        dict_data = {}
+        for i in input_names:
+            data = request.POST[i]
+            dict_data[i] = data
+        # Replace this with the exported key from JavaScript
+        # Base64-decode the exported JWK
+        jwk_str = dict_data['value'] # replace with the exported JWK
+        jwk_json = base64.urlsafe_b64decode(jwk_str + "===")
+        jwk = json.loads(jwk_json)
 
-            # Generate SHA256 hash of the transaction string
-            hash_object = hashlib.sha256()
-            hash_object.update(transaction_string.encode('utf-8'))
-            hash_value = hash_object.hexdigest()
-            return HttpResponse(str(dict_data.values())+"\n"+hash_value)
-        else:
-            # Define the length of the random string
-            length = 32
-            # Define the character set to choose from
-            charset = string.ascii_letters + string.digits
-            # Generate the random string
-            random_string = ''.join(secrets.choice(charset) for i in range(length)).upper()
+        # Extract the key parameters from the JWK
+        key_bytes = base64.urlsafe_b64decode(jwk['k'])
+        iv = base64.urlsafe_b64decode(jwk['iv'])
+        tag = base64.urlsafe_b64decode(jwk['alg'].split('.')[2])
+        salt = base64.urlsafe_b64decode(jwk['kdf']['salt'])
+        iterations = jwk['kdf']['iter']
+        key_length = len(key_bytes) * 8
 
-            return render(request,"details.html",{'transaction_id':random_string})
-    else:
-        return HttpResponse("You are not logged in")
+        # Derive the key from the password using PBKDF2
+        password = dict_data['pass'] # replace with the password used to generate the key
+        kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=key_length//8,
+            salt=salt,
+            iterations=iterations,
+            backend=default_backend()
+        )
+        key = kdf.derive(password.encode())
+
+        # Initialize the cipher with the key, IV, and tag
+        cipher = Cipher(algorithms.AES(key), modes.GCM(iv, tag), backend=default_backend())
+
+        # Decrypt the ciphertext
+        ciphertext = dict_data['amount'] # replace with the base64-encoded ciphertext
+        decryptor = cipher.decryptor()
+        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+
+@login_required
+def wallet(request):
+    user = User.objects.filter(username=request.user.username)[0]
+    balance = Wallet.objects.filter(user=user)[0].balance
+    return render(request,"wallet.html",{'balance':balance})
 
 def landing(request):
     return render(request,"Blocash.html")
@@ -106,6 +113,11 @@ def register(request):
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.save()
+            user_obj = User.objects.filter(username=data['username'])[0]
+            Wallet.objects.create(
+                balance = 100.00,
+                user = user_obj
+            )
             message = "You are registered successfully!"
             messages.success(request, message)
             return render(request, "login_form.html")
@@ -134,15 +146,14 @@ def logon(request):
             return render(request,"login_form.html")
     else :
         return render(request,"login_form.html")
-    
+
+@login_required    
 def logoff(request):
     logout(request)
     return redirect("/")
     
+@login_required
 def profile(request):
-    if request.user.is_authenticated :
-        my_user = User.objects.filter(username = str(request.user.username))[0]
-        name = my_user.first_name + " " + my_user.last_name
-        return render(request,"dashboard.html",{'name':name.upper()})
-    else :
-        return redirect("/login/")
+    my_user = User.objects.filter(username = str(request.user.username))[0]
+    name = my_user.first_name + " " + my_user.last_name
+    return render(request,"dashboard.html",{'name':name.upper()})

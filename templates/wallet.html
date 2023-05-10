@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <title>Admin Dashboard | By Code Info</title>
   <link rel="shortcut icon" href="/static/img/logos.jpg.png">
+  <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 
  <style>
 	/*  import google fonts */
@@ -169,41 +175,7 @@ table td{
   color: rgb(100, 100, 100);
 }
 
-
-
-/* Sidebar Section
-.sidebar{
-  width: 15%;
-  padding: 2rem 1rem;
-  background: #fff;
-}
-.sidebar h4{
-  margin-bottom: 1.5rem;
-}
-.sidebar .balance{
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-.balance .icon{
-  color: #fff;
-  font-size: 20px;
-  border-radius: 6px;
-  margin-right: 1rem;
-  padding: 1rem;
-  background: rgb(37, 37, 37);
-}
-.balance .info h5{
-  font-size: 16px;
-}
-.balance .info span{
-  font-size: 14px;
-  color: rgb(100, 100, 100);
-}
-.balance .info i{
-  margin-right: 2px;
-} */
- </style>
+</style>
 </head>
 <body>
   <header class="header">
@@ -223,32 +195,17 @@ table td{
       </div>
     </div>
   </header>
-  <!-- <div class="container">
-    <nav>
-      <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="#" class="active">Dashboard</a>
-        <a href="#">Profile</a>
-        <a href="#">History</a>
-        <a href="#">Application</a>
-        <a href="#">My Account</a>
-        <a href="#">Documnets</a>
-
-        <div class="links">
-          <span>Quick Link</span>
-          <a href="#">Paypal</a>
-          <a href="#">EasyPay</a>
-          <a href="#">SadaPay</a>
-        </div>
-      </div>
-    </nav> -->
-
-    <div class="main-body">
+     <div class="main-body">
       <h2>Payment Wallet</h2>
       <div class="promo_card">
         <h1>Welcome to Blocash wallet</h1>
-        <span>check your balance</span>
-        <button>Learn More</button>
+        <span>Your balance is : ${{balance}}</span>
+      </div>
+      <div class="d-inline-block">
+        <!-- Pay button -->
+        <button type="button" class="btn btn-primary">Pay</button>
+        <!-- Add Money button -->
+        <button type="button" class="btn btn-success">Add Money</button>
       </div>
 
       <div class="history_lists">
