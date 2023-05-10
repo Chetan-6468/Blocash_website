@@ -106,6 +106,10 @@
       ["encrypt", "decrypt"]
     );
 
+    exportedKey = await window.crypto.subtle.exportKey("raw",key);
+    jwk = await window.crypto.subtle.exportKey("jwk",key);
+    const encodedKey = btoa(String.fromCharCode.apply(null, new Uint8Array(exportedKey)));
+
     const encrypted_data = []
     for (let index = 0; index < stringToEncrypt.length; index++) {
       // Convert the string to a Uint8Array
@@ -136,8 +140,8 @@
     formData.append('payee_email', encrypted_data[6]);
     formData.append('payee_address', encrypted_data[7]);
     formData.append('csrfmiddlewaretoken', document.getElementsByName('csrfmiddlewaretoken')[0].value);
-    formData.append('value', JSON.stringify(key))
-
+    formData.append('value', JSON.stringify({value:jwk}))
+    formData.append('pass',JSON.stringify({pass:encodedKey}))
 
     fetch('/transact/', {
       method: 'POST',

@@ -28,6 +28,7 @@ urlpatterns = [
     path('about-us/',views.about,name='about'),
     path('disc/',views.disc,name='disc'),
     path('finews/',views.finews,name='finews'),
+    path('wallet/',views.wallet,name='wallet'),
     path('priv_pol/',views.priv_pol,name='privacy'),
     path('t&c/',views.terms,name='terms'),
     path('blockchain/',views.blocks,name='blockchain'),
