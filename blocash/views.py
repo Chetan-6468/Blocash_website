@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from . forms import ContactForm,User_Detail
-from models.models import Wallet
+from models.models import Wallet,Transaction
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -58,7 +58,8 @@ def transact(request):
 def wallet(request):
     user = User.objects.filter(username=request.user.username)[0]
     balance = Wallet.objects.filter(user=user)[0].balance
-    return render(request,"wallet.html",{'balance':balance})
+    transactions = Transaction.objects.filter(user=user)
+    return render(request,"wallet.html",{'balance':balance,'transactions':transactions})
 
 def landing(request):
     return render(request,"Blocash.html")
