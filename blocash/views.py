@@ -165,7 +165,11 @@ def register(request):
             user.last_name = data['last_name']
             user.save()
             user_obj = User.objects.filter(username=data['username'])[0]
+            # Handle GET request
+            alphabet = string.ascii_letters + string.digits
+            random_str =  ''.join(secrets.choice(alphabet) for _ in range(24))
             Wallet.objects.create(
+                wallet_address = random_str.upper(),
                 balance = 100.00,
                 user = user_obj
             )
