@@ -37,10 +37,10 @@
   <!-- End of Async Drift Code -->
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <link rel="shortcut icon" href="static/img/logos.jpg.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-     
+
+  <link rel="shortcut icon" href="static/img/logos.jpg.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+
 
 
 
@@ -60,119 +60,6 @@
     }
 
 
- .hello{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 30px;
-    color: black;
-    position:absolute;
-    top: 32%;
-    left: 72%;
-    transform: translate(-35%,20%);
-  }
-
-
-  
-
-.container420 {
-    text-align: center;
-    background: #f5f5f5;
-    margin: 10px;
-    padding: 10px;
-}
-
-.header420 {
-    padding-top: 30px;
-    color: #444;
-    font-size: 20px;
-    margin: auto;
-    line-height: 50px;
-    margin: 10px;
-    padding: 10px;
-}
-
-.sub-container420 {
-    max-width: 1200px;
-    margin: auto;
-    padding: 30px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-}
-
-.our{
- font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.teams420 {
-    margin: 50px;
-    padding: 22px;
-    max-width: 40%;
-    cursor: pointer;
-    transition: 0.4s;
-    box-sizing: border-box;
-    
-}
-
-.teams420:hover {
-    background: #e19b22;
-    border-radius: 12px;
-    
-}
-
-.teams420 img {
-    width: 180px;
-    height: 180px;
-}
-
-.name420 {
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
-    margin-right: 49px;
-}
-
-.desig420 {
-    font-style: italic;
-    color: #888;
-    margin-right: 49px;
-
-}
-
-.about420 {
-    margin: 20px 0;
-    font-weight: lighter;
-    color: #4e4e4e;
-    
-}
-
-.social-links420 {
-    margin: 14px;
-}
-
-.social-links420 a {
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    transition: .4s;
-}
-
-.social-links420 a:hover {
-    transform: scale(1.5);
-}
-
-.social-links420 a i {
-    color: #444;
-}
-
-@media screen and (max-width: 600px) {
-    .teams {
-        max-width: 100%;
-    }
-}
-  
-
     .hello {
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
       font-size: 30px;
@@ -183,6 +70,118 @@
       transform: translate(-35%, 20%);
     }
 
+
+
+
+    .container420 {
+      text-align: center;
+      background: #f5f5f5;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    .header420 {
+      padding-top: 30px;
+      color: #444;
+      font-size: 20px;
+      margin: auto;
+      line-height: 50px;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    .sub-container420 {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+    }
+
+    .our {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .teams420 {
+      margin: 50px;
+      padding: 22px;
+      max-width: 40%;
+      cursor: pointer;
+      transition: 0.4s;
+      box-sizing: border-box;
+
+    }
+
+    .teams420:hover {
+      background: #e19b22;
+      border-radius: 12px;
+
+    }
+
+    .teams420 img {
+      width: 180px;
+      height: 180px;
+    }
+
+    .name420 {
+      padding: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+      margin-right: 49px;
+    }
+
+    .desig420 {
+      font-style: italic;
+      color: #888;
+      margin-right: 49px;
+
+    }
+
+    .about420 {
+      margin: 20px 0;
+      font-weight: lighter;
+      color: #4e4e4e;
+
+    }
+
+    .social-links420 {
+      margin: 14px;
+    }
+
+    .social-links420 a {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      transition: .4s;
+    }
+
+    .social-links420 a:hover {
+      transform: scale(1.5);
+    }
+
+    .social-links420 a i {
+      color: #444;
+    }
+
+    @media screen and (max-width: 600px) {
+      .teams {
+        max-width: 100%;
+      }
+    }
+
+
+    .hello {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 30px;
+      color: black;
+      position: absolute;
+      top: 32%;
+      left: 72%;
+      transform: translate(-35%, 20%);
+    }
   </STYLE>
 
 
@@ -204,7 +203,7 @@
       {% endblock %}
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         {% if request.user.is_authenticated %}
-        
+
         {% else %}
         <a href={% url 'register' %} target="_blank" class="mr-5 hover:bg-gray-200">Sign Up</a>
         {% endif %}
@@ -365,7 +364,9 @@
         <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
           <div class="h-full text-center">
 
-            <img alt="testimonial" class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/static/img/2.jpeg">
+            <img alt="testimonial"
+              class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
+              src="/static/img/2.jpeg">
 
             <p class="leading-relaxed"><b>Five Stars</b><br>
               Thank you so much for the amazing service, Special thanks to Mr. Rais Shaikh.</p>
@@ -392,59 +393,60 @@
 
 
 
-<!-- ----------our team----------------------------- -->
-<section>
-  <div class="container420">
-    <div class="header420">
+  <!-- ----------our team----------------------------- -->
+  <section>
+    <div class="container420">
+      <div class="header420">
         <h1 class="our"><strong>Our Team</strong></h1>
         <p>"Talent wins games, but teamwork and intelligence win championships."</p>
+      </div>
+      <div class="sub-container420">
+        <div class="teams420">
+          <img src="/static/img/chetan.jpeg" alt="">
+          <div class="name420">chetan Garg</div>
+          <div class="desig420">Bug hunter</div>
+          <div class="about420">If you find something,say something</div>
+
+          <div class="social-links420">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="teams420">
+          <img src="/static/img/5.jpg" alt="">
+          <div class="name420">Siddhnat Gupta</div>
+          <div class="desig420">Ethical hacker</div>
+          <div class="about420">There is no place like 127.0.0.1 </div>
+
+          <div class="social-links420">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="teams420">
+          <img src="/static/img/WhatsApp Image 2023-03-23 at 19.21.59.jpg" alt="">
+          <div class="name420">Manika singh</div>
+          <div class="desig420">Game developer</div>
+          <div class="about420">Happiness is what we create as
+            <br>developers.
+          </div>
+
+          <div class="social-links420">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="sub-container420">
-        <div class="teams420">
-            <img src="/static/img/chetan.jpeg" alt="">
-            <div class="name420">chetan Garg</div>
-            <div class="desig420">Bug hunter</div>
-            <div class="about420">If you find something,say something</div>
-
-            <div class="social-links420">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
-            </div>
-        </div>
-
-        <div class="teams420">
-            <img src="/static/img/5.jpg" alt="">
-            <div class="name420">Siddhnat Gupta</div>
-            <div class="desig420">Ethical hacker</div>
-            <div class="about420">There is no place like 127.0.0.1 </div>
-
-            <div class="social-links420">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
-            </div>
-        </div>
-
-        <div class="teams420">
-            <img src="/static/img/WhatsApp Image 2023-03-23 at 19.21.59.jpg" alt="">
-            <div class="name420">Manika singh</div>
-            <div class="desig420">Game developer</div>
-            <div class="about420">Happiness is what we create as 
-              <br>developers. </div>
-
-            <div class="social-links420">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
+  </section>
 
   <footer class="text-gray-600 body-font">
     <div
@@ -570,5 +572,20 @@
   </footer>
 
 </body>
+
+<!-- SweetAlert JS -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% if messages %}
+{% for message in messages %}
+<script>
+  swal({
+    title: "{{ message }}",
+    text: "{{ message.tags }}",
+    icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% elif message.tags == 'info' %}info{% endif %}",
+  });
+</script>
+{% endfor %}
+{% endif %}
 
 </html>

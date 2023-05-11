@@ -204,7 +204,9 @@ def logon(request):
 
 @login_required    
 def logoff(request):
+    
     logout(request)
+    messages.info(request,"So sad !!")
     return redirect("/")
     
 @login_required
