@@ -39,6 +39,8 @@ def transact(request):
             data = request.POST[i]
             dict_data[i] = data
         
+        recv_hash = request.POST['hash']
+
         value_json = dict_data['key']
         value_dict = json.loads(value_json)
         key_bytes = base64.urlsafe_b64decode(value_dict['k']+'==')
@@ -66,6 +68,32 @@ def transact(request):
 
             
             data[key] = decrypt_aes_gcm(cipher_without_tag,key_bytes,iv_bytes,tag=tag)
+
+            # Define transaction details
+            transaction = {
+                "transaction_id": data['transaction_id'],
+                "amount": data['amount'],
+                "payer": {
+                    "name": data['payer_name'],
+                    "email": data['payer_email'],
+                    "address": data['payer_address']
+                },
+                "payee": {
+                    "name": data['payee_name'],
+                    "email": data['payee_email'],
+                    "address": data['payee_address']
+                }
+            }
+
+            json_data = json.dumps(transaction)
+            
+            # Generate SHA256 hash of the transaction string
+            hash_object = hashlib.sha256()
+            hash_object.update(json_data.encode('utf-8'))
+            hash_value = hash_object.hexdigest()
+
+        print(recv_hash,hash_value)
+
         return HttpResponse(data.values())
     else:
         # Handle GET request

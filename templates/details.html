@@ -86,71 +86,108 @@
 
 <script>
   document.getElementById("generate_hash_button").addEventListener('click', async function () {
-  // Define the string to encrypt
-  const stringToEncrypt = [
-    document.getElementById('transaction_id').value,
-    document.getElementById('amount').value,
-    document.getElementById('payer_name').value,
-    document.getElementById('payer_email').value,
-    document.getElementById('payer_address').value,
-    document.getElementById('payee_name').value,
-    document.getElementById('payee_email').value,
-    document.getElementById('payee_address').value
-  ];
+    // Define the string to encrypt
+    const stringToEncrypt = [
+      document.getElementById('transaction_id').value,
+      document.getElementById('amount').value,
+      document.getElementById('payer_name').value,
+      document.getElementById('payer_email').value,
+      document.getElementById('payer_address').value,
+      document.getElementById('payee_name').value,
+      document.getElementById('payee_email').value,
+      document.getElementById('payee_address').value
+    ];
 
-  console.log(stringToEncrypt);
+    // Define transaction details
+    const transaction = {
+      "transaction_id": stringToEncrypt[0],
+      "amount": stringToEncrypt[1],
+      "payer": {
+        "name": stringToEncrypt[2],
+        "email": stringToEncrypt[3],
+        "address": stringToEncrypt[4]
+      },
+      "payee": {
+        "name": stringToEncrypt[5],
+        "email": stringToEncrypt[6],
+        "address": stringToEncrypt[7]
+      }
+    };
 
-  // Generate a random encryption key
-  const key = await window.crypto.subtle.generateKey(
-    { name: "AES-GCM", length: 256 },
-    true,
-    ["encrypt", "decrypt"]
-  );
+    // Convert transaction object to JSON object
+    const transactionJSON = JSON.stringify(transaction);
 
-  const jwk = await window.crypto.subtle.exportKey("jwk", key);
-  const encodedKey = JSON.stringify(jwk);
-  // Generate a random initialization vector
-  const iv = await window.crypto.getRandomValues(new Uint8Array(12));
-  // Define the encryption algorithm
-  const algorithm = { name: "AES-GCM", iv: iv };
-  const encrypted_data = [];
-  for (let index = 0; index < stringToEncrypt.length; index++) {
-    // Convert the string to a Uint8Array
-    const data = new TextEncoder().encode(stringToEncrypt[index]);
-
-
-    // Encrypt the data using the key and algorithm
-    const encryptedData = await window.crypto.subtle.encrypt(algorithm, key, data);
-
-    // Encode the encrypted data as a Base64 string
-    const base64EncodedData = btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
-
-    encrypted_data.push(base64EncodedData);
-  }
   
-  
-  const formData = new FormData();
-  formData.append('transaction_id', encrypted_data[0]);
-  formData.append('amount', encrypted_data[1]);
-  formData.append('payer_name', encrypted_data[2]);
-  formData.append('payer_email', encrypted_data[3]);
-  formData.append('payer_address', encrypted_data[4]);
-  formData.append('payee_name', encrypted_data[5]);
-  formData.append('payee_email', encrypted_data[6]);
-  formData.append('payee_address', encrypted_data[7]);
-  formData.append('csrfmiddlewaretoken', document.getElementsByName('csrfmiddlewaretoken')[0].value);
-  formData.append('key', encodedKey);
-  formData.append('iv',JSON.stringify(iv));
-  
-  console.log(encrypted_data,encodedKey,JSON.stringify(iv))
-  fetch('/transact/', {
-    method: 'POST',
-    body: formData
-  }).then(response => {
-    // Handle the response
-  }).catch(error => {
-    // Handle the error
+
+    // Function to calculate SHA-256 hash
+    function calculateSHA256Hash(data) {
+      // Create a hash object
+      const hash = crypto.createHash('sha256');
+
+      // Update the hash object with the data
+      hash.update(data);
+
+      // Calculate the hash digest (result)
+      const hashDigest = hash.digest('hex');
+
+      return hashDigest;
+    }
+
+    const hash = calculateSHA256Hash(transactionJSON)
+    console.log(stringToEncrypt);
+
+    // Generate a random encryption key
+    const key = await window.crypto.subtle.generateKey(
+      { name: "AES-GCM", length: 256 },
+      true,
+      ["encrypt", "decrypt"]
+    );
+
+    const jwk = await window.crypto.subtle.exportKey("jwk", key);
+    const encodedKey = JSON.stringify(jwk);
+    // Generate a random initialization vector
+    const iv = await window.crypto.getRandomValues(new Uint8Array(12));
+    // Define the encryption algorithm
+    const algorithm = { name: "AES-GCM", iv: iv };
+    const encrypted_data = [];
+    for (let index = 0; index < stringToEncrypt.length; index++) {
+      // Convert the string to a Uint8Array
+      const data = new TextEncoder().encode(stringToEncrypt[index]);
+
+
+      // Encrypt the data using the key and algorithm
+      const encryptedData = await window.crypto.subtle.encrypt(algorithm, key, data);
+
+      // Encode the encrypted data as a Base64 string
+      const base64EncodedData = btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
+
+      encrypted_data.push(base64EncodedData);
+    }
+
+
+    const formData = new FormData();
+    formData.append('transaction_id', encrypted_data[0]);
+    formData.append('amount', encrypted_data[1]);
+    formData.append('payer_name', encrypted_data[2]);
+    formData.append('payer_email', encrypted_data[3]);
+    formData.append('payer_address', encrypted_data[4]);
+    formData.append('payee_name', encrypted_data[5]);
+    formData.append('payee_email', encrypted_data[6]);
+    formData.append('payee_address', encrypted_data[7]);
+    formData.append('csrfmiddlewaretoken', document.getElementsByName('csrfmiddlewaretoken')[0].value);
+    formData.append('key', encodedKey);
+    formData.append('iv', JSON.stringify(iv));
+    formData.append('hash',JSON.stringify(hash))
+
+    console.log(encrypted_data, encodedKey, JSON.stringify(iv))
+    fetch('/transact/', {
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      // Handle the response
+    }).catch(error => {
+      // Handle the error
+    });
   });
-});
 
 </script>

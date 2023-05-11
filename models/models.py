@@ -19,6 +19,7 @@ class Transaction(models.Model):
 
 class Wallet(models.Model):
     # Fields for the Wallet model
+    wallet_address = models.CharField(max_length=24,default="None")
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
