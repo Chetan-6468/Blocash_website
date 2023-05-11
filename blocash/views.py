@@ -13,6 +13,23 @@ from cryptography.hazmat.primitives import hashes,padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 
+def decrypt_aes_gcm(ciphertext, key, iv, aad=None,tag=None):
+    # Create AES-GCM cipher with the provided key
+    cipher = Cipher(algorithms.AES(key), modes.GCM(iv,tag))
+
+    # Create a decryptor object
+    decryptor = cipher.decryptor()
+
+    # Set associated data (if provided)
+    if aad:
+        decryptor.authenticate_additional_data(aad)
+
+    # Decrypt the ciphertext
+    plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+
+    return plaintext
+
+
 @login_required
 def transact(request):
     if request.method == 'POST':
@@ -47,18 +64,9 @@ def transact(request):
             tag = cipher_bytes[-16:]
             cipher_without_tag = cipher_bytes[:-16]
 
-            # Create AES-GCM cipher with the provided key
-            cipher = Cipher(algorithms.AES(key_bytes), modes.GCM(iv_bytes,tag))
-
-            # Create a decryptor object
-            decryptor = cipher.decryptor()
-                
-            # Decrypt the ciphertext
-            plaintext = decryptor.update(cipher_bytes) + decryptor.finalize()
-
-            actual_data = plaintext.decode()
-            data[key] = actual_data
-        return HttpResponse(data)
+            
+            data[key] = decrypt_aes_gcm(cipher_without_tag,key_bytes,iv_bytes,tag=tag)
+        return HttpResponse(data.values())
     else:
         # Handle GET request
         alphabet = string.ascii_letters + string.digits + string.punctuation
