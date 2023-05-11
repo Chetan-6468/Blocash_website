@@ -113,6 +113,19 @@
         <button class="btn btn-primary">Click me</button>
     </div>
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+
+<script>
+  
+  swal({
+    title: "Yes you are in !",
+    text: "Entered Blocash !!",
+    icon: "success",
+  });
+</script>
+{% endif %}
+
 <script>
     $(document).ready(function () {
 
@@ -121,6 +134,7 @@
         });
 
     });
+    
 </script>
 
 </html>
