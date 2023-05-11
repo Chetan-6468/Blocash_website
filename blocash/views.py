@@ -97,17 +97,19 @@ def transact(request):
         return HttpResponse(data.values())
     else:
         # Handle GET request
-        alphabet = string.ascii_letters + string.digits + string.punctuation
+        alphabet = string.ascii_letters + string.digits
         transaction_id =  ''.join(secrets.choice(alphabet) for _ in range(24))
 
-        return render(request,"details.html",{'transaction_id':transaction_id})
+        return render(request,"details.html",{'transaction_id':transaction_id.upper()})
         
 @login_required
 def wallet(request):
     user = User.objects.filter(username=request.user.username)[0]
-    balance = Wallet.objects.filter(user=user)[0].balance
+    user_inst = Wallet.objects.filter(user=user)[0]
+    balance = user_inst.balance
+    wallet_addr = user_inst.wallet_address
     transactions = Transaction.objects.filter(user=user)
-    return render(request,"wallet.html",{'balance':balance,'transactions':transactions})
+    return render(request,"wallet.html",{'balance':balance,'transactions':transactions,'wallet_addr': wallet_addr})
 
 def landing(request):
     return render(request,"Blocash.html")
@@ -205,4 +207,5 @@ def logoff(request):
 def profile(request):
     my_user = User.objects.filter(username = str(request.user.username))[0]
     name = my_user.first_name + " " + my_user.last_name
-    return render(request,"dashboard.html",{'name':name.upper()})
+    wallet_addr = Wallet.objects.filter(user=my_user)[0].wallet_address
+    return render(request,"dashboard.html",{'name':name.upper(),'wallet_addr':wallet_addr})
