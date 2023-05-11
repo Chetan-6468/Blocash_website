@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Transaction(models.Model):
     # Fields for the Transaction model
-    tid = models.CharField(max_length=24)
+    tid = models.CharField(max_length=24,default="None")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=255)
