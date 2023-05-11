@@ -26,12 +26,25 @@
     </form>
 
   </div>
-  
+
+  <style>
+    #pop {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   {% if messages %}
+  
   <script>
-    {% for message in messages %}
-    alert('{{ message }}');
-    {% endfor %}
+    
+    swal({
+      title: "Yes you are in !",
+      text: "Entered Blocash !!",
+      icon: "success",
+    });
   </script>
   {% endif %}
 
