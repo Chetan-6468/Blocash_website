@@ -36,3 +36,4 @@ urlpatterns = [
     path('contact/',views.contact,name='contact-us'),
     path('transact/',views.transact,name='transact'),
 ]
+# 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

@@ -9,51 +9,63 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import json,hashlib,secrets,string,requests,json,base64
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives import hashes,padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 
 @login_required
 def transact(request):
     if request.method == 'POST':
-        input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address','value']
+        input_names = ['transaction_id', 'amount', 'payer_name', 'payer_email', 'payer_address', 'payee_name', 'payee_email', 'payee_address', 'key','iv']
         dict_data = {}
         for i in input_names:
             data = request.POST[i]
             dict_data[i] = data
-        # Replace this with the exported key from JavaScript
-        # Base64-decode the exported JWK
-        jwk_str = dict_data['value'] # replace with the exported JWK
-        jwk_json = base64.urlsafe_b64decode(jwk_str + "===")
-        jwk = json.loads(jwk_json)
+        
+        value_json = dict_data['key']
+        value_dict = json.loads(value_json)
+        key_bytes = base64.urlsafe_b64decode(value_dict['k']+'==')
+        
+        iv_json = dict_data['iv']
+        iv_dict = json.loads(iv_json)
+        iv_bytes = bytes(iv_dict.values())
 
-        # Extract the key parameters from the JWK
-        key_bytes = base64.urlsafe_b64decode(jwk['k'])
-        iv = base64.urlsafe_b64decode(jwk['iv'])
-        tag = base64.urlsafe_b64decode(jwk['alg'].split('.')[2])
-        salt = base64.urlsafe_b64decode(jwk['kdf']['salt'])
-        iterations = jwk['kdf']['iter']
-        key_length = len(key_bytes) * 8
+        del dict_data['key'] 
+        del dict_data['iv']
+        data = {}
+        keys = dict_data.keys()
 
-        # Derive the key from the password using PBKDF2
-        password = dict_data['pass'] # replace with the password used to generate the key
-        kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            length=key_length//8,
-            salt=salt,
-            iterations=iterations,
-            backend=default_backend()
-        )
-        key = kdf.derive(password.encode())
+        for key in keys :
 
-        # Initialize the cipher with the key, IV, and tag
-        cipher = Cipher(algorithms.AES(key), modes.GCM(iv, tag), backend=default_backend())
+            cipher_text = dict_data[key]
+            cipher_bytes = base64.urlsafe_b64decode(cipher_text)
 
-        # Decrypt the ciphertext
-        ciphertext = dict_data['amount'] # replace with the base64-encoded ciphertext
-        decryptor = cipher.decryptor()
-        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+            # Ensure cipher_bytes is a byte-like object
+            if isinstance(cipher_bytes, str):
+                cipher_bytes = cipher_bytes.encode('utf-8')
 
+            tag = cipher_bytes[-16:]
+            cipher_without_tag = cipher_bytes[:-16]
+
+            # Create AES-GCM cipher with the provided key
+            cipher = Cipher(algorithms.AES(key_bytes), modes.GCM(iv_bytes,tag))
+
+            # Create a decryptor object
+            decryptor = cipher.decryptor()
+                
+            # Decrypt the ciphertext
+            plaintext = decryptor.update(cipher_bytes) + decryptor.finalize()
+
+            actual_data = plaintext.decode()
+            data[key] = actual_data
+        return HttpResponse(data)
+    else:
+        # Handle GET request
+        alphabet = string.ascii_letters + string.digits + string.punctuation
+        transaction_id =  ''.join(secrets.choice(alphabet) for _ in range(24))
+
+        return render(request,"details.html",{'transaction_id':transaction_id})
+        
 @login_required
 def wallet(request):
     user = User.objects.filter(username=request.user.username)[0]
