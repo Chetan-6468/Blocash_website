@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Generate SHA256 Hash</title>
 
+
   <!-- CSS styles -->
   <style>
     label {
@@ -117,23 +118,18 @@
     // Convert transaction object to JSON object
     const transactionJSON = JSON.stringify(transaction);
 
-  
 
-    // Function to calculate SHA-256 hash
-    function calculateSHA256Hash(data) {
-      // Create a hash object
-      const hash = crypto.createHash('sha256');
-
-      // Update the hash object with the data
-      hash.update(data);
-
-      // Calculate the hash digest (result)
-      const hashDigest = hash.digest('hex');
-
-      return hashDigest;
+    async function sha256(message) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+      return hashHex;
     }
 
-    const hash = calculateSHA256Hash(transactionJSON)
+    
+
     console.log(stringToEncrypt);
 
     // Generate a random encryption key
@@ -164,6 +160,15 @@
       encrypted_data.push(base64EncodedData);
     }
 
+    // Example usage
+    const message = transactionJSON;
+    sha256(message)
+      .then(hash => {
+        encrypted_data.push(hash);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 
     const formData = new FormData();
     formData.append('transaction_id', encrypted_data[0]);
@@ -177,7 +182,7 @@
     formData.append('csrfmiddlewaretoken', document.getElementsByName('csrfmiddlewaretoken')[0].value);
     formData.append('key', encodedKey);
     formData.append('iv', JSON.stringify(iv));
-    formData.append('hash',JSON.stringify(hash))
+    formData.append('hash', JSON.stringify(encrypted_data[8]))
 
     console.log(encrypted_data, encodedKey, JSON.stringify(iv))
     fetch('/transact/', {
