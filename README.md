@@ -1,5 +1,5 @@
 # Blocash_website
-With my team we are developed a unique transaction website using html, css, javascript, python, php. To see the website first of all start the xampp server and visit  http://localhost:8080/Blocash/blocash.html
+With my team we are developed a unique transaction website 
 
 Unique thing that we do in our fintech project is , Using SHA256 Algorithm to increase the security of privacy and another unique thing we were do is that we create a story option and another unique thing we were do is that we add a news options were user can read all latest news related to finance , share market and many more , one more unique thing we add is that we add a bot chat box for user querries, and some issue related to payment gateway, and issue relates to implementation of hash in website, these all thing we explain in detailed below. 
 
@@ -17,9 +17,7 @@ Overall, our fintech website project is focused on providing a secure and trustw
 (5) All my team member's give thier best and we make our website (60%) sucessfully , not 100% sucessfully because we are not able implement SHA256 algorithm process into our website as our code work perfectly and gnerate digital signature also but due to not attach it with website our website is not 100% done, but surely in upcoming days we will implement SHA256 algorithm into our website.
 
 
-
-
-front-end video link of the webiste:  https://drive.google.com/file/d/15l_ZuO4eY8gIp1sxJ9b6ojiSGRDAIr1c/view?usp=sharing
-Using SHA256 algorithm to secure online transaction more , in this vidio explain all SHA code work in detailed: https://drive.google.com/file/d/1-Bvyq76cOWjm7lqRmYYUp6qA3pxGWfl6/view?usp=share_link
+Video presentation link : https://www.youtube.com/watch?v=oJBxU_98QKQ 
+ 
 
 Thank You :)
